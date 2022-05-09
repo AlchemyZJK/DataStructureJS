@@ -24,16 +24,46 @@ class LinkedList {
     }
   }
 
-  // insert node next to the head node
+  // insert node into the head node
   preappend(val) {
     const node = new ListNode(val);
     if (this.head === null) {
       this.head = node;
       this.tail = node;
     } else {
-      node.next = this.head.next;
-      this.head.next = node;
+      node.next = this.head;
+      this.head = node;
     }
+  }
+
+  // search
+  search(val) {
+    if (this.head === null) {
+      console.error('LinkedList is Empty.');
+      return null;
+    }
+    let cur = this.head;
+    while (cur !== null) {
+      if (cur.val === val) {
+        return cur;
+      }
+      cur = cur.next;
+    }
+    return null;
+  }
+
+  insert(val, searchVal) {
+    const cur = this.search(searchVal);
+    if (cur === null) {
+      console.error(`{node.val = ${searchVal}} doesn't exist in current LinkedList.`);
+      return false;
+    }
+    const node = new ListNode(val, cur.next);
+    cur.next = node;
+    if (this.tail === cur) {
+      this.tail = node;
+    }
+    return true;
   }
 
   // delete all the node.val === val in the LinkedList
