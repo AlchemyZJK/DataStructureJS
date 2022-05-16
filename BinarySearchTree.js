@@ -80,6 +80,10 @@ class BinarySearchTree {
     if (isRootDeleted) {
       if (cur.left === null) {
         this.root = cur.right;
+        return true;
+      } else if (cur.right === null) {
+        this.root = cur.left;
+        return true;
       }
     } else {
       if (cur.left === null) {
@@ -88,6 +92,14 @@ class BinarySearchTree {
         } else {
           pre.right = cur.right;
         }
+        return true;
+      } else if (cur.right === null) {
+        if (pos === -1) {
+          pre.left = cur.right;
+        } else {
+          pre.right = cur.right;
+        }
+        return true;
       }
     }
     let preRightMin = null;
